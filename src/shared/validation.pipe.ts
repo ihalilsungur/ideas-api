@@ -18,6 +18,7 @@ import {
           HttpStatus.BAD_REQUEST,
         );
       }
+      
       const { metatype } = metadata;
       if (!metatype || !this.toValidate(metatype)) {
         return value;
