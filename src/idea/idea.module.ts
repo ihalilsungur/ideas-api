@@ -4,8 +4,9 @@ import { IdeaService } from './idea.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IdeaEntity } from './idea.entity';
 
+
 @Module({
-  imports: [TypeOrmModule.forFeature([IdeaEntity])],//veritabanımıza baglandik.
+  imports: [TypeOrmModule.forFeature([IdeaEntity])], //veritabanımıza baglandik.
   controllers: [IdeaController],
   providers: [IdeaService],
 })
