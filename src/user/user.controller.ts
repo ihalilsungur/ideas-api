@@ -22,7 +22,7 @@ export class UserController {
   }
 
   @Post('register')
- // @UsePipes(new ValidationPipe())
+  @UsePipes(new ValidationPipe())
   register(@Body() data: UserDTO) {
     return this.userService.userRegister(data);
   }
