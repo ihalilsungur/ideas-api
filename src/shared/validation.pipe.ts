@@ -12,6 +12,7 @@ import {
   @Injectable()
   export class ValidationPipe implements PipeTransform {
     async transform(value: any, metadata: ArgumentMetadata) {
+      console.log("FFFFFFFFFFFFFfff: ",value);
       if (value instanceof Object && this.isEmpty(value)) {
         throw new HttpException(
           'Validation failed: No body submitted',

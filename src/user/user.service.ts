@@ -19,6 +19,7 @@ export class UserService {
   async userLogin(data: UserDTO) :Promise<UserRO>{
     const { username, password } = data;
     const user = await this.userRepository.findOne({ where: { username } });
+    console.log("Login user: ",user);
     if (!user || !(await user.comparePassword(password))) {
       throw new HttpException(
         'Invalid username or password',
