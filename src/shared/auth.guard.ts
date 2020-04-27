@@ -16,8 +16,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     //burada ise token kontrollu yapıyoruz yani bu  token geçerli mi  ?
-    request.user = await this.validateToken(request.headers.authorization);
-
+      request.user = await this.validateToken(request.headers.authorization);
     return true;
   }
 
@@ -26,13 +25,10 @@ export class AuthGuard implements CanActivate {
       throw new HttpException('Invalid token ', HttpStatus.FORBIDDEN);
     }
 
-    console.log("Gelen Auth : ",auth);
-
     const token = auth.split(' ')[1];
-    console.log("Gelen Token : ",token);
+
     try {
-      const decoded= await jwt.verify(token, process.env.SECRET);
-      console.log("Gelen Decoded : ",decoded);
+      const decoded:any = await jwt.verify(token, process.env.SECRET);
       return decoded;
     } catch (error) {
       const message = 'Token error ' + (error.message || error.name);
