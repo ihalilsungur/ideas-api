@@ -11,15 +11,17 @@ export class UserService {
     private userRepository: Repository<UserEntity>,
   ) {}
 
-  async showAll():Promise<UserRO[]> {
-    const users = await this.userRepository.find({relations:['ideas']});
+  async showAll(): Promise<UserRO[]> {
+    const users = await this.userRepository.find({
+      relations: ['ideas', 'bookmarks'],
+    });
     return users.map(user => user.toResponseObject(false));
   }
 
-  async userLogin(data: UserDTO) :Promise<UserRO>{
+  async userLogin(data: UserDTO): Promise<UserRO> {
     const { username, password } = data;
     const user = await this.userRepository.findOne({ where: { username } });
-    console.log("Login user: ",user);
+    console.log('Login user: ', user);
     if (!user || !(await user.comparePassword(password))) {
       throw new HttpException(
         'Invalid username or password',
@@ -29,7 +31,7 @@ export class UserService {
     return user.toResponseObject();
   }
 
-  async userRegister(data: UserDTO):Promise<UserRO> {
+  async userRegister(data: UserDTO): Promise<UserRO> {
     //ilk olarak data'nin içindeki username alalim.
     const { username } = data;
     //daha sonra gelen username daha once veritanında var mı yok mu
